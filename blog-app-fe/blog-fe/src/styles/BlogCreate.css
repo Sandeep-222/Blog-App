@@ -1,0 +1,80 @@
+.flex-wrapper{
+    display: flex;
+    justify-content: center;
+    padding: 50px 0px;
+    height: auto;
+    box-sizing: border-box;
+}
+.blog-create-container {
+    width: 900px;
+    padding: 30px;
+    background-color: #f4f6fb;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    font-family: 'Georgia', serif;
+    box-sizing: border-box;
+}
+
+.blog-create-heading {
+    font-size: 28px;
+    text-align: center;
+    margin-bottom: 25px;
+    color: #333;     
+}
+
+.blog-create-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.blog-input-title {
+    padding: 12px;
+    font-size: 18px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-family: 'Georgia', serif;
+}
+
+.blog-input-content {
+    padding: 12px;
+    font-size: 16px;
+    line-height: 1.6;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    resize: vertical;
+    height: 300px;
+}
+
+.blog-create-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.btn-create, .btn-cancel {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn-create {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.btn-create:hover {
+    background-color: #45a049;
+}
+
+.btn-cancel {
+    background-color: #ccc;
+    color: #333;
+}
+
+.btn-cancel:hover {
+    background-color: #bbb;
+}

@@ -1,0 +1,45 @@
+services:
+  backend:
+    build:
+      context: ./blog-project/blog_app
+    container_name: blogapp-be
+    command: sh -c "python manage.py migrate --noinput && gunicorn blog_app.wsgi:application --bind 0.0.0.0:8000"
+    environment:
+      - POSTGRES_DB=blog_db
+      - POSTGRES_USER=airflow_user
+      - POSTGRES_PASSWORD=airflow
+      - HOST=db
+    depends_on:
+      - db
+    expose:
+      - 8000
+    networks:
+      - blog-network
+    
+  db:
+    image: postgres:15
+    container_name: postgres_db_blog
+    environment:
+      - POSTGRES_DB=blog_db
+      - POSTGRES_USER=airflow_user
+      - POSTGRES_PASSWORD=airflow
+    volumes:
+      - myblogdata:/var/lib/postgresql/data
+    networks:
+      - blog-network
+
+  frontend:
+    build:
+      context: ./blog-app-fe/blog-fe
+    container_name: blogapp-fe
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - blog-network
+
+volumes:
+  myblogdata:
+networks:
+  blog-network:
