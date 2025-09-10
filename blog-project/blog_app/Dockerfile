@@ -9,3 +9,5 @@ RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 CMD sh -c "python manage.py migrate --noinput && gunicorn blog_app.wsgi:application --bind 0.0.0.0:8000 --log-level debug"
+
+
