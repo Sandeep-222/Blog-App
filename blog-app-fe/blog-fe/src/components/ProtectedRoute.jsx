@@ -3,6 +3,8 @@ import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants";
 import { jwtDecode} from 'jwt-decode'
 import { Navigate } from "react-router-dom";
 import api from "../api";
+import DotsLoading from "./DotsLoading";
+import MinimalLoginSkeleton from "./LoginSkeltonLoding";
 
 
 
@@ -15,6 +17,9 @@ function ProtectedRoute({children}){
     },[])
 
     const auth = async () => {
+        if (import.meta.env.VITE_ENV === 'development') {
+            await new Promise(resolve => setTimeout(resolve, 4000)); // 2 second delay
+        }
         const token = localStorage.getItem(ACCESS_TOKEN)
         if(!token){
             setIsloggedin(false) 
@@ -54,7 +59,7 @@ function ProtectedRoute({children}){
     }
 
     if(isLoggedIn === null){
-        return <div>Loading...</div>
+        return <DotsLoading />
     }
 
     return isLoggedIn === true ?  children : <Navigate to={'/login'} />
