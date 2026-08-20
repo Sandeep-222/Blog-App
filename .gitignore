@@ -1,0 +1,16 @@
+# Secrets — never commit
+.env
+.env.*
+!.env.example
+
+# Virtualenvs
+.blog-env/
+venv/
+.venv/
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Local DB
+db.sqlite3

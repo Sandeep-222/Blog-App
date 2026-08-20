@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.db import connection
+from django.http import JsonResponse
 from rest_framework import generics
 from .serializers import UserCreateSerializer,PostSerializer,CommentSerializer
 from django.contrib.auth.models import User
@@ -68,3 +70,9 @@ class CommentDeleteview(generics.DestroyAPIView):
         obj = Comment.objects.get(id=comment_id, post__id=post_id)
         self.check_object_permissions(self.request, obj)
         return obj
+
+def healthz(request):
+    with connection.cursor() as cur:
+        cur.execute("SELECT 1")
+        cur.fetchone()
+    return JsonResponse({"status": "ok"})

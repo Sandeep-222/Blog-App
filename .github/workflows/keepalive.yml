@@ -1,0 +1,20 @@
+name: keepalive
+
+# Daily ping so the Supabase project never hits its ~7-day inactivity pause.
+# Render's 15-min idle spin-down is left alone on purpose — a cold start costs
+# ~50s on the next request, and nothing breaks.
+on:
+  schedule:
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping health endpoint
+        run: |
+          curl -sS --max-time 90 --retry 3 --retry-delay 20 \
+            -o /dev/null -w '%{http_code}\n' \
+            --fail \
+            https://blog-app-opss.onrender.com/healthz/
