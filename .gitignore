@@ -5,6 +5,7 @@
 
 # Virtualenvs
 .blog-env/
+.blog-env
 venv/
 .venv/
 
